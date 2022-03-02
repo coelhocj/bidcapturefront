@@ -18,7 +18,7 @@ interface BidInterface {
 export async function getServerSideProps(
   context: GetServerSidePropsContext
 ): Promise<GetServerSidePropsResult<BidInterface>> {
-  const result = await fetch(`http://localhost:8080/api-bids/bids`);
+  const result = await fetch(`https://bid-capture-backend.herokuapp.com/api-bids/bids`);
   const preparedResult = await result.json();
   return {
     props: {
