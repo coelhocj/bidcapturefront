@@ -18,13 +18,23 @@ interface BidInterface {
 export async function getServerSideProps(
   context: GetServerSidePropsContext
 ): Promise<GetServerSidePropsResult<BidInterface>> {
-  const result = await fetch(`https://bid-capture-backend.herokuapp.com/api-bids/bids`);
-  const preparedResult = await result.json();
-  return {
-    props: {
-      bids: preparedResult,
-    },
-  };
+  const response = await fetch(
+    `https://bid-capture-backend.herokuapp.com/api-bids/bids`
+  );
+  if (response.status == 200) {
+    const preparedResult = await response.json();
+    return {
+      props: {
+        bids: preparedResult,
+      },
+    };
+  } else {
+    return {
+      props: {
+        bids: [],
+      },
+    };
+  }
 }
 
 export default function Home({ bids }: BidInterface) {
@@ -43,13 +53,29 @@ export default function Home({ bids }: BidInterface) {
       </nav>
 
       <main className={styles.main}>
-        {bids.map((bid, key) => {
-          return <BidContainer key={key} bidData={bid} />;
-        })}
+        {bids.length > 0 ? (
+          bids.map((bid, key) => {
+            return <BidContainer key={key} bidData={bid} />;
+          })
+        ) : (
+          <h4>
+            Não foi possível realizar a captura de informações no site.
+            <br />
+            Verifique se{" "}
+            <a
+              href={
+                "https://www.bombinhas.sc.gov.br/licitacoes/index/index/codMapaItem/11152"
+              }
+            >
+              https://www.bombinhas.sc.gov.br/licitacoes/index/index/codMapaItem/11152
+            </a>
+             está disponível.
+          </h4>
+        )}
       </main>
 
       <footer className={styles.footer}>
-        <span className={styles.logo}>{"Cristiano C. Júnior"}</span>
+        <span>{"Cristiano C. Júnior"}</span>
       </footer>
     </div>
   );
