@@ -33,3 +33,36 @@
     flex-direction: column;
   }
 }
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 70vh;
+  p {
+    font-weight: bold;
+    animation: loadScreen 3s ease-in-out infinite;
+  }
+}
+
+@keyframes loadScreen {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.paginatorTitle{
+  text-align: center;
+}
+
+.paginator{
+  display: flex;
+  justify-content: center;
+}
