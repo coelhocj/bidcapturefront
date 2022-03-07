@@ -25,7 +25,7 @@ interface BidProps {
   bidData: Bid;
 }
 
-export default function BidContainer({ bidData: bid }: BidProps) {
+export default function BidContainer({ bidData: bid }: BidProps):JSX.Element {
   const [checked, setChecked] = useLocalStorage(bid.id.toString(), false);
   const [opened, setOpened] = useState(false);
 

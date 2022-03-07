@@ -10,7 +10,7 @@ export default function PageSelector({
   pageNumber,
   selected,
   selectedCallback,
-}: PageProps) {
+}: PageProps):JSX.Element {
   return (
     <div
       onClick={() => selectedCallback(pageNumber)}

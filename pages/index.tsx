@@ -1,16 +1,16 @@
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import BidContainer from "../components/BidContainer";
+import BidContainer, { Bid } from "../components/BidContainer";
 import PageSelector from "../components/PageSelector";
 import styles from "../styles/Home.module.scss";
 
 export default function Home() {
-  const [bids, setBids] = useState([]);
+  const [bids, setBids] = useState<Bid[]>([]);
   const [error, setError] = useState(false);
   const pages = Array.from({ length: 25 }, (_, i) => i + 1);
   const [selectedPage, setSelectedPage] = useState(1);
 
-  async function getData(pageFrom: number, pageTo: number) {
+  async function getData(pageFrom: number, pageTo: number):Promise<void> {
     const response = await fetch(
       `https://bid-capture-backend.herokuapp.com/api-bids/bids?pageFrom=${pageFrom}&pageTo=${pageTo}`
     );
